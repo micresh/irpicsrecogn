@@ -41,7 +41,7 @@ for picnum in range(1, 801):
     in_data = np.zeros(((images_count, window_height, window_width)))
     for step in range(images_count):
         for y_cor in range(window_height):
-            for x in range(window_width):
+            for x_cor in range(window_width):
                 in_data[step][y_cor][x_cor] = tiff[y_cor][x_cor + image_step * step]
         if len(objects_coor) == 0:
             for x in range(8):
