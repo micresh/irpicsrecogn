@@ -42,7 +42,7 @@ for picnum in range(1, 801):
     for step in range(images_count):
         for y_cor in range(window_height):
             for x in range(window_width):
-                in_data[step][y_cor][x_cor] = tiff[c][n][y_cor][x_cor + image_step * step]
+                in_data[step][y_cor][x_cor] = tiff[y_cor][x_cor + image_step * step]
         if len(objects_coor) == 0:
             for x in range(8):
                 out_data[step][x] = 0
