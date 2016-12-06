@@ -30,9 +30,9 @@ with open('objects.csv', 'r') as f:
         objects_coor.append(t)
 
 for picnum in range(1, 801):
-    s = "/home/micresh/traindata/Train1/" + str(picnum) + '.tif'
+    s = "/home/micresh/traindata/traindata/Train1/" + str(picnum) + '.tif'
     tiff = imread(s)
-    images_count = 16000/image_step
+    images_count = int(16000/image_step)
     objects_on_pic = []
     for i in range(len(objects_coor)):
         if objects_coor[i][0] == picnum:
