@@ -2,6 +2,7 @@ from keras.models import Model
 from keras.layers import Input, Dense
 from tifffile import *
 import numpy as np
+import csv
 
 window_height = 576
 window_width = 200
