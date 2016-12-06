@@ -9,7 +9,7 @@ image_step = window_width
 outputs = 10
 
 
-def test_network():
+def test_network(in_data, out_data):
     inp = Input(shape=(window_height, window_width,))  # 3d vector as inputdata
     hidden_1 = Dense(0.1*n, activation='tanh')(inp)
     out = Dense(outputs, activation='sigmoid')(hidden_1)
@@ -17,6 +17,7 @@ def test_network():
     model.compile(optimizer='rmsprop',
                   loss='mse',
                   metrics=['accuracy'])
+    model.train_on_batch(in_data, out_data)
     return model.evaluate()
 
 
@@ -27,7 +28,7 @@ with open('objects.csv', 'r') as f:
         t = [int(row[0]), int(row[1]), int(row[2])]
         objects_coor.append(t)
 
-for picnum in range(1, 1001):
+for picnum in range(1, 801):
     s = "/home/micresh/traindata/Train1/" + str(picnum) + '.tif'
     tiff = imread(s)
     images_count = 16000/image_step
@@ -44,3 +45,11 @@ for picnum in range(1, 1001):
         if len(objects_coor) == 0:
             for x in range(8):
                 out_data[step][x] = 0
+        else:
+            x = 0
+            while x < 8:
+                for y in range(len(objects_coor)):
+                    out_data[step][x] = objects_coor[y][0]
+                    out_data[step][x+1] = objects_coor[y][1]
+                    x += 2
+    print (test_network(in_data, out_data))
